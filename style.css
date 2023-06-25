@@ -6,11 +6,11 @@
 #grid{
     display:grid;
     grid-template-columns: auto auto auto auto;
-    max-width: 300px;
-    min-width: 250px;
+    width: 300px;
+   
     margin:100px auto auto auto;
     border:1px solid black;
-    gap:5px;
+    gap:2px;
     padding: 10px;
     border-radius: 5px;
     background-color: #b8b9bb;
@@ -19,25 +19,30 @@
     grid-column: 1/5;  
 }
 #display{
+    max-width: 260px;
    grid-column: 1/5; 
    padding:20px 20px;
    border:1px solid black;
    border-radius: 5px;
    background-color: white;
+   
 }
 #display2{
-    
+    overflow-wrap: break-word;
     text-align: right;
     padding: 10px;
+    height: 1em;
 }
 #display1{
-    
+    overflow-wrap: break-word;
     text-align: right;
     padding: 10px;
+    height: 1em;
 }
 .btn{
     padding:20px 20px;
-    border-radius: 5px;
+    border-radius: 2px;
+    border: none;
 }
 .btn:hover{
     background-color: #c7c2c2;
