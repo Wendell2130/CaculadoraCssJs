@@ -1,7 +1,8 @@
 const display1=document.querySelector("#display1");
 const display2=document.querySelector("#display2");
 const btns=document.querySelectorAll(".btn");
-
+display1.innerHTML="";
+display2.innerHTML="";
 const calc={
     num1:"",
     num2:"",
@@ -38,28 +39,53 @@ const calc={
         if(this.operation=="/") return calc.div();
     }
 };
-
+function activeButtons(){
+    if(display1.innerHTML) {
+        document.querySelector("#del").style.backgroundColor="#FFB6C1";
+     
+        document.querySelector("#eraser").style.backgroundColor="#FFB6C1";
+    }else{
+        document.querySelector("#del").style.backgroundColor="aliceblue";
+        document.querySelector("#eraser").style.backgroundColor="aliceblue";
+    }
+    if(display2.innerHTML) {
+        document.querySelector("#ce").style.backgroundColor="#FFB6C1";
+       
+    }else{
+        document.querySelector("#ce").style.backgroundColor="aliceblue";
+       
+    }
+}
 for(btn of btns){
     btn.addEventListener("click",function(e){
+
         var button=((e.target.tagName)=="I")?"DEL":e.target.value;
       
         if(!Number.isNaN(+button)|| button=="."){// é número
-            if((!(display1.innerHTML.includes(".") && button==".")) &&(display1.innerHTML.length<28)) display1.innerHTML+=button;
-        } 
+            if((!(display1.innerHTML.includes(".") && button==".")) &&(display1.innerHTML.length<28)){
+                 display1.innerHTML+=button;
+                 activeButtons();
+            }
+          } 
+        
+       
         else {//não é número
            switch(button) {
             case "CE":
                 display1.innerHTML="";
                 display2.innerHTML="";
+                
             break;
             
             case "C":
                 display1.innerHTML="";
+                
             break;
             
             case "DEL":
                 
                 display1.innerHTML=display1.innerHTML.substring(0,display1.innerHTML.length-1);
+              
             break;
             
             case "=":
@@ -69,10 +95,12 @@ for(btn of btns){
                         display2.innerHTML=calc.calculation();
                         display1.innerHTML="";
                         calc.operation="";
+                       
                     break;
                    }else{
                     display2.innerHTML=display1.innerHTML?display1.innerHTML:display2.innerHTML;
                     display1.innerHTML="";
+                    
                     } 
                    
             break;    
@@ -83,6 +111,7 @@ for(btn of btns){
                 calc.operation="+";
                 display2.innerHTML=calc.soma()+calc.operation;
                 display1.innerHTML="";
+                
             break;
             case "-":
                 calc.num1=display1.innerHTML;
@@ -90,6 +119,7 @@ for(btn of btns){
                 calc.operation="-";
                 display2.innerHTML=calc.sub()+calc.operation;
                 display1.innerHTML="";
+                
             break; 
             case "x":
                 calc.num1=display1.innerHTML;
@@ -97,6 +127,7 @@ for(btn of btns){
                 calc.operation="x";
                 display2.innerHTML=calc.mult()+calc.operation;
                 display1.innerHTML="";
+               
             break;  
             case "/":
                 calc.num1=display1.innerHTML;
@@ -104,9 +135,13 @@ for(btn of btns){
                 calc.operation="/";
                 display2.innerHTML=calc.div()+calc.operation;
                 display1.innerHTML="";
-            break;     
+               
+            break;
+                 
             }
-
+            activeButtons();
         }
+        
+            
     });
 }
